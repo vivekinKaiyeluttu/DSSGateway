@@ -1,0 +1,31 @@
+{
+    "name": "UserRoleMapping",
+    "fields": [],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "users",
+            "otherEntityRelationshipName": "userRoleMapping",
+            "relationshipName": "users",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "userRole",
+            "otherEntityRelationshipName": "userRoleMapping",
+            "relationshipName": "userRole",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200105022003",
+    "javadoc": "UserRoleMapping is a mapping table between an User and corresponding role\\nin the tenant to which he belong to.",
+    "entityTableName": "user_role_mapping",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

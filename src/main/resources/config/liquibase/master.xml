@@ -14,6 +14,26 @@
     <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105021958_added_entity_Tenant.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105021959_added_entity_Users.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022000_added_entity_Permission.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022001_added_entity_RolePermissionMapping.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022002_added_entity_UserRole.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022003_added_entity_UserRoleMapping.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022004_added_entity_SignatureSetting.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022005_added_entity_WorkFlow.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022006_added_entity_WorkFlowUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022007_added_entity_Document.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022008_added_entity_DocumentSignature.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20200105021959_added_entity_constraints_Users.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022001_added_entity_constraints_RolePermissionMapping.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022002_added_entity_constraints_UserRole.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022003_added_entity_constraints_UserRoleMapping.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022004_added_entity_constraints_SignatureSetting.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022005_added_entity_constraints_WorkFlow.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022006_added_entity_constraints_WorkFlowUser.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022007_added_entity_constraints_Document.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200105022008_added_entity_constraints_DocumentSignature.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

@@ -1,0 +1,67 @@
+<div>
+    <h2 id="page-heading">
+        <span>Work Flows</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-work-flow" [routerLink]="['/work-flow/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Work Flow
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="workFlows?.length === 0">
+        <span>No workFlows found</span>
+    </div>
+    <div class="table-responsive" *ngIf="workFlows?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th scope="col" ><span>ID</span></th>
+            <th scope="col" ><span>Name</span></th>
+            <th scope="col" ><span>Status</span></th>
+            <th scope="col" ><span>Created At</span></th>
+            <th scope="col" ><span>Updated At</span></th>
+            <th scope="col" ><span>Users</span></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let workFlow of workFlows ;trackBy: trackId">
+                <td><a [routerLink]="['/work-flow', workFlow.id, 'view' ]">{{workFlow.id}}</a></td>
+                <td>{{workFlow.name}}</td>
+                <td>{{workFlow.status}}</td>
+                <td>{{workFlow.createdAt | date:'mediumDate'}}</td>
+                <td>{{workFlow.updatedAt | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="workFlow.users">
+                        <a [routerLink]="['/users', workFlow.users?.id, 'view' ]" >{{workFlow.users?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/work-flow', workFlow.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/work-flow', workFlow.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(workFlow)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

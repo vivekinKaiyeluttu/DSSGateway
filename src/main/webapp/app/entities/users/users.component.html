@@ -1,0 +1,81 @@
+<div>
+    <h2 id="page-heading">
+        <span>Users</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-users" [routerLink]="['/users/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Users
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="users?.length === 0">
+        <span>No users found</span>
+    </div>
+    <div class="table-responsive" *ngIf="users?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th scope="col" ><span>ID</span></th>
+            <th scope="col" ><span>First Name</span></th>
+            <th scope="col" ><span>Last Name</span></th>
+            <th scope="col" ><span>Email</span></th>
+            <th scope="col" ><span>Password</span></th>
+            <th scope="col" ><span>Verified</span></th>
+            <th scope="col" ><span>Challenge Token</span></th>
+            <th scope="col" ><span>Work Flow Initiate</span></th>
+            <th scope="col" ><span>Created By</span></th>
+            <th scope="col" ><span>Created At</span></th>
+            <th scope="col" ><span>Updated By</span></th>
+            <th scope="col" ><span>Updated At</span></th>
+            <th scope="col" ><span>Tenant</span></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let users of users ;trackBy: trackId">
+                <td><a [routerLink]="['/users', users.id, 'view' ]">{{users.id}}</a></td>
+                <td>{{users.firstName}}</td>
+                <td>{{users.lastName}}</td>
+                <td>{{users.email}}</td>
+                <td>{{users.password}}</td>
+                <td>{{users.verified}}</td>
+                <td>{{users.challengeToken}}</td>
+                <td>{{users.workFlowInitiate}}</td>
+                <td>{{users.createdBy}}</td>
+                <td>{{users.createdAt | date:'mediumDate'}}</td>
+                <td>{{users.updatedBy}}</td>
+                <td>{{users.updatedAt | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="users.tenant">
+                        <a [routerLink]="['/tenant', users.tenant?.id, 'view' ]" >{{users.tenant?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/users', users.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/users', users.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(users)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

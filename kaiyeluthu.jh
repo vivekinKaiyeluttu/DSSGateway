@@ -1,0 +1,225 @@
+
+/** Tenant will be used to implement & identify tenancy
+ * of the user in service. Default organization of an user would be
+ * from Kaiyeluthu. Tenant will be onboarded through different flows not
+ * targetted for the first cut release. So all users will belong to
+ * Kaiyeluthu by default.
+ */
+entity Tenant {
+	/** Name of the Tenant */
+    name String required
+    /** URL of the Tenant */
+    domain String
+    /** Primary Email contact in tenant */
+    primaryEmail String required
+    /** Secondary Email contact in tenant */
+    secondaryEmail String
+    /** Name of the Organization */
+    organization String required
+    createdBy String
+    createdAt LocalDate
+    updatedBy String
+    updatedAt LocalDate
+}
+
+/** Users are the actors in the application who basically have 
+ * capablities like creating work_flow, signing a document as part of work_flow
+ * and verify the document that's been signed by others.
+ */
+entity Users {
+	  /** firstname of the user */
+    firstName String required
+    /** lastname of the user */
+    lastName String
+    /** user email */
+    email String required pattern(/^[A-Za-z0-9+_.-]+@(.+)$/)
+    /** password that can be used to login */
+    password String required
+    /** will be used during signup flow and in forget password flow */
+    verified Boolean
+    /** challenge that can be used while forget password flow and invite flow */
+    challengeToken String
+    /** if an user dosn't have account while initiating WorkFlow then we will set */
+    workFlowInitiate Boolean
+    createdBy String
+    createdAt LocalDate
+    updatedBy String
+    updatedAt LocalDate
+}
+
+/** Relationship between a Tenant and Users defined in this relationship.
+ * A tenant can have multiple users. An user is supposed to part of only one tenant
+ * for various opertional reasons and use-cases.
+ */
+relationship OneToMany {
+	Tenant to Users
+}
+
+/** Permission are the list of possible permissions that are avaliable in the 
+ * application.
+ */
+entity Permission {
+    name Permissions
+}
+
+/** Permissions is enumeration of Permission. */
+enum Permissions {
+	DOCUMENT_READ, DOCUMENT_SIGN, CREATE_WF
+}
+
+/** RolePermissionMapping is mapping table between UserRole & Permission
+ */
+entity RolePermissionMapping {	
+}
+
+/** UserRole is used to maintain the list of roles that are associated
+ * for a particular tenant. As there is a possiblity for need of customization
+ * of roles for each and every tenant.
+ */
+entity UserRole {
+	/** name of the role */
+    name String    
+}
+
+/** Relationship definition for RolePermissionMapping */
+relationship OneToMany {
+	UserRole to RolePermissionMapping
+    Permission to RolePermissionMapping
+}
+
+/** Relationship between a Tenant and the UserRole will be maintained through this 
+ * definition. One Tenant can have multiple UserRole.
+ */
+relationship OneToMany {
+	Tenant to UserRole
+}
+
+/** UserRoleMapping is a mapping table between an User and corresponding role
+ * in the tenant to which he belong to.
+ */
+entity UserRoleMapping {
+}
+
+/** Relationship definition for UserRoleMapping */
+relationship OneToMany {
+	Users to UserRoleMapping
+    UserRole to UserRoleMapping
+}
+
+/** SignatureSetting holds settings of a signature
+ * w.r.t to particular user. An user can have multiple
+ * signatures based on the document he can choose which signature
+ * needs to be inserted in a workflow.
+ */
+entity SignatureSetting {
+	/** name of the signature setting for identification */
+    name String required
+    /** signAs text that needs to displayed in signature */
+    signAs String required
+    /** User designation it's optional */
+    designation String
+    /** signature image that needs to appear in signature*/
+    image Blob
+    /** if it's set true by default this signatures will appear in
+     * the document in which the user is signing.
+     */
+    defaultSignature Boolean 
+    /** Address of the user that needs to displayed. */
+    address String    
+    createdAt LocalDate
+    updatedAt LocalDate
+}
+
+/** relationship definition between Users and the SignatureSetting 
+ * one User can have many SignatureSetting.
+ */
+relationship OneToMany {
+	Users to SignatureSetting
+}
+
+/** WorkFlow holds the definition of document
+ * signing workflow. A user who is creating a workflow
+ * need not to be a part of the workflow.
+ */
+entity WorkFlow {
+    name String
+    status Status
+    createdAt LocalDate
+    updatedAt LocalDate
+}
+
+/** relationship between an user and workflow
+ * a user can create multiple workflows.
+ */
+relationship OneToMany {
+	Users to WorkFlow
+}
+
+/** enumeration for workflow status */
+enum Status {
+	INITIATED, EXPIRED, COMPLETED
+}
+
+/** WorkFlowUser holds the definition of users
+ * who can participate in the workflow.
+ * Generally WorkFlowUsers are decided by the user who is 
+ * creating the workflow. He can choose the user who will be 
+ * part of workflow while creating the workflow. If a user is not within the
+ * system then a user will be created and invite will be sent to him.
+ */
+entity WorkFlowUser {
+	/** indicates the position of user at which he can sign in*/
+    step Long
+}
+
+/** relationship definition between Users, WorkFlow and WorkFlowUser.  */
+relationship OneToMany {
+	WorkFlow to WorkFlowUser
+    Users to WorkFlowUser
+}
+
+/** Document is the hero of this application.
+ * This entity will hold information about the document.
+ * it's expected to add more fields to this entity. When the document is
+ * changed/updated a new entry has to be added.
+ */
+entity Document {    
+	/** Name of the file */
+    fileName String
+    /** file digest to identify the file */
+    messageDigest String
+    /** actual file, will be deprecated after first cut */
+    file Blob
+    /** date after which it can not be signed by anyone */
+    expireAt LocalDate
+    createdAt LocalDate    
+}
+
+/** relationship between workflow and the document
+ * one workflow can have multiple document.
+ */
+relationship OneToMany {
+	WorkFlow to Document
+}
+
+/** DocumentSignature is second hero of this application
+ * holds information about signature
+ */
+entity DocumentSignature {
+	/** Date from which the signature will be valid */
+    validFrom LocalDate
+    /** Date till which the signature will be valid */
+    validTo LocalDate
+    /** id of the device that's been used to sign by the user */
+    deviceId Long
+    /** FIDO2 signature */
+    signature String
+    /** Date at which signature is created */
+    createdAt LocalDate    
+}
+
+/** relationship between Document, WorkFlowUser & DocumentSignature */
+relationship OneToMany {
+	Document to DocumentSignature    
+    WorkFlowUser to DocumentSignature
+}

@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="document">
+            <h2><span>Document</span> {{document.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span ngbTooltip="Name of the file">File Name</span></dt>
+                <dd>
+                    <span>{{document.fileName}}</span>
+                </dd>
+                <dt><span ngbTooltip="file digest to identify the file">Message Digest</span></dt>
+                <dd>
+                    <span>{{document.messageDigest}}</span>
+                </dd>
+                <dt><span ngbTooltip="actual file, will be deprecated after first cut">File</span></dt>
+                <dd>
+                    <div *ngIf="document.file">
+                        <a (click)="openFile(document.fileContentType!, document.file)">open</a>
+                        {{document.fileContentType}}, {{byteSize(document.file)}}
+                    </div>
+                </dd>
+                <dt><span ngbTooltip="date after which it can not be signed by anyone">Expire At</span></dt>
+                <dd>
+                    <span>{{document.expireAt}}</span>
+                </dd>
+                <dt><span>Created At</span></dt>
+                <dd>
+                    <span>{{document.createdAt}}</span>
+                </dd>
+                <dt><span>Work Flow</span></dt>
+                <dd>
+                    <div *ngIf="document.workFlow">
+                        <a [routerLink]="['/work-flow', document.workFlow?.id, 'view']">{{document.workFlow?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/document', document.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

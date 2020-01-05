@@ -1,0 +1,95 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-tenant-heading">Create or edit a Tenant</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_name" ngbTooltip="Name of the Tenant">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('name')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_domain" ngbTooltip="URL of the Tenant">Domain</label>
+                    <input type="text" class="form-control" name="domain" id="field_domain"
+                           formControlName="domain"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_primaryEmail" ngbTooltip="Primary Email contact in tenant">Primary Email</label>
+                    <input type="text" class="form-control" name="primaryEmail" id="field_primaryEmail"
+                           formControlName="primaryEmail"/>
+                    <div *ngIf="editForm.get('primaryEmail')!.invalid && (editForm.get('primaryEmail')!.dirty || editForm.get('primaryEmail')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('primaryEmail')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_secondaryEmail" ngbTooltip="Secondary Email contact in tenant">Secondary Email</label>
+                    <input type="text" class="form-control" name="secondaryEmail" id="field_secondaryEmail"
+                           formControlName="secondaryEmail"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_organization" ngbTooltip="Name of the Organization">Organization</label>
+                    <input type="text" class="form-control" name="organization" id="field_organization"
+                           formControlName="organization"/>
+                    <div *ngIf="editForm.get('organization')!.invalid && (editForm.get('organization')!.dirty || editForm.get('organization')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('organization')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_createdBy">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                           formControlName="createdBy"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_createdAt">Created At</label>
+                    <div class="input-group">
+                        <input id="field_createdAt" type="text" class="form-control" name="createdAt" ngbDatepicker  #createdAtDp="ngbDatepicker" formControlName="createdAt"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="createdAtDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_updatedBy">Updated By</label>
+                    <input type="text" class="form-control" name="updatedBy" id="field_updatedBy"
+                           formControlName="updatedBy"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_updatedAt">Updated At</label>
+                    <div class="input-group">
+                        <input id="field_updatedAt" type="text" class="form-control" name="updatedAt" ngbDatepicker  #updatedAtDp="ngbDatepicker" formControlName="updatedAt"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="updatedAtDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

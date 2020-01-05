@@ -1,0 +1,72 @@
+<div>
+    <h2 id="page-heading">
+        <span>Documents</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-document" [routerLink]="['/document/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Document
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="documents?.length === 0">
+        <span>No documents found</span>
+    </div>
+    <div class="table-responsive" *ngIf="documents?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th scope="col" ><span>ID</span></th>
+            <th scope="col" ><span>File Name</span></th>
+            <th scope="col" ><span>Message Digest</span></th>
+            <th scope="col" ><span>File</span></th>
+            <th scope="col" ><span>Expire At</span></th>
+            <th scope="col" ><span>Created At</span></th>
+            <th scope="col" ><span>Work Flow</span></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let document of documents ;trackBy: trackId">
+                <td><a [routerLink]="['/document', document.id, 'view' ]">{{document.id}}</a></td>
+                <td>{{document.fileName}}</td>
+                <td>{{document.messageDigest}}</td>
+                <td>
+                    <a *ngIf="document.file" (click)="openFile(document.fileContentType, document.file)">open</a>
+                    <span *ngIf="document.file">{{document.fileContentType}}, {{byteSize(document.file)}}</span>
+                </td>
+                <td>{{document.expireAt | date:'mediumDate'}}</td>
+                <td>{{document.createdAt | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="document.workFlow">
+                        <a [routerLink]="['/work-flow', document.workFlow?.id, 'view' ]" >{{document.workFlow?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/document', document.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/document', document.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(document)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

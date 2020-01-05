@@ -1,0 +1,75 @@
+<div>
+    <h2 id="page-heading">
+        <span>Document Signatures</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-document-signature" [routerLink]="['/document-signature/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Document Signature
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="documentSignatures?.length === 0">
+        <span>No documentSignatures found</span>
+    </div>
+    <div class="table-responsive" *ngIf="documentSignatures?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th scope="col" ><span>ID</span></th>
+            <th scope="col" ><span>Valid From</span></th>
+            <th scope="col" ><span>Valid To</span></th>
+            <th scope="col" ><span>Device Id</span></th>
+            <th scope="col" ><span>Signature</span></th>
+            <th scope="col" ><span>Created At</span></th>
+            <th scope="col" ><span>Document</span></th>
+            <th scope="col" ><span>Work Flow User</span></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let documentSignature of documentSignatures ;trackBy: trackId">
+                <td><a [routerLink]="['/document-signature', documentSignature.id, 'view' ]">{{documentSignature.id}}</a></td>
+                <td>{{documentSignature.validFrom | date:'mediumDate'}}</td>
+                <td>{{documentSignature.validTo | date:'mediumDate'}}</td>
+                <td>{{documentSignature.deviceId}}</td>
+                <td>{{documentSignature.signature}}</td>
+                <td>{{documentSignature.createdAt | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="documentSignature.document">
+                        <a [routerLink]="['/document', documentSignature.document?.id, 'view' ]" >{{documentSignature.document?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="documentSignature.workFlowUser">
+                        <a [routerLink]="['/work-flow-user', documentSignature.workFlowUser?.id, 'view' ]" >{{documentSignature.workFlowUser?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/document-signature', documentSignature.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/document-signature', documentSignature.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(documentSignature)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

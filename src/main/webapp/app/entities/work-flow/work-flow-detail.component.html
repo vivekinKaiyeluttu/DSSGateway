@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="workFlow">
+            <h2><span>Work Flow</span> {{workFlow.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{workFlow.name}}</span>
+                </dd>
+                <dt><span>Status</span></dt>
+                <dd>
+                    <span>{{workFlow.status}}</span>
+                </dd>
+                <dt><span>Created At</span></dt>
+                <dd>
+                    <span>{{workFlow.createdAt}}</span>
+                </dd>
+                <dt><span>Updated At</span></dt>
+                <dd>
+                    <span>{{workFlow.updatedAt}}</span>
+                </dd>
+                <dt><span>Users</span></dt>
+                <dd>
+                    <div *ngIf="workFlow.users">
+                        <a [routerLink]="['/users', workFlow.users?.id, 'view']">{{workFlow.users?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/work-flow', workFlow.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    
+    <!--
+        Added the entity WorkFlowUser.
+    -->
+    <changeSet id="20200105022006-1" author="jhipster">
+        <createTable tableName="work_flow_user" remarks="WorkFlowUser holds the definition of users\nwho can participate in the workflow.\nGenerally WorkFlowUsers are decided by the user who is\ncreating the workflow. He can choose the user who will be\npart of workflow while creating the workflow. If a user is not within the\nsystem then a user will be created and invite will be sent to him.">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="step" type="bigint" remarks="indicates the position of user at which he can sign in">
+                <constraints nullable="true" />
+            </column>
+            <column name="work_flow_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="users_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20200105022006-1-relations" author="jhipster">
+
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20200105022006-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/work_flow_user.csv"
+                  separator=";"
+                  tableName="work_flow_user">
+            <column name="id" type="numeric"/>
+            <column name="step" type="numeric"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

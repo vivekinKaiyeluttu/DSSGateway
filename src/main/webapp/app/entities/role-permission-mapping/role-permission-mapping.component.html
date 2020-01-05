@@ -1,0 +1,65 @@
+<div>
+    <h2 id="page-heading">
+        <span>Role Permission Mappings</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-role-permission-mapping" [routerLink]="['/role-permission-mapping/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Role Permission Mapping
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="rolePermissionMappings?.length === 0">
+        <span>No rolePermissionMappings found</span>
+    </div>
+    <div class="table-responsive" *ngIf="rolePermissionMappings?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th scope="col" ><span>ID</span></th>
+            <th scope="col" ><span>User Role</span></th>
+            <th scope="col" ><span>Permission</span></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let rolePermissionMapping of rolePermissionMappings ;trackBy: trackId">
+                <td><a [routerLink]="['/role-permission-mapping', rolePermissionMapping.id, 'view' ]">{{rolePermissionMapping.id}}</a></td>
+                <td>
+                    <div *ngIf="rolePermissionMapping.userRole">
+                        <a [routerLink]="['/user-role', rolePermissionMapping.userRole?.id, 'view' ]" >{{rolePermissionMapping.userRole?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="rolePermissionMapping.permission">
+                        <a [routerLink]="['/permission', rolePermissionMapping.permission?.id, 'view' ]" >{{rolePermissionMapping.permission?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/role-permission-mapping', rolePermissionMapping.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/role-permission-mapping', rolePermissionMapping.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(rolePermissionMapping)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

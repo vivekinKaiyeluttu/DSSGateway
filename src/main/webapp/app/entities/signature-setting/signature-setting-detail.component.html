@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="signatureSetting">
+            <h2><span>Signature Setting</span> {{signatureSetting.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span ngbTooltip="name of the signature setting for identification">Name</span></dt>
+                <dd>
+                    <span>{{signatureSetting.name}}</span>
+                </dd>
+                <dt><span ngbTooltip="signAs text that needs to displayed in signature">Sign As</span></dt>
+                <dd>
+                    <span>{{signatureSetting.signAs}}</span>
+                </dd>
+                <dt><span ngbTooltip="User designation it&#39;s optional">Designation</span></dt>
+                <dd>
+                    <span>{{signatureSetting.designation}}</span>
+                </dd>
+                <dt><span ngbTooltip="signature image that needs to appear in signature">Image</span></dt>
+                <dd>
+                    <div *ngIf="signatureSetting.image">
+                        <a (click)="openFile(signatureSetting.imageContentType!, signatureSetting.image)">open</a>
+                        {{signatureSetting.imageContentType}}, {{byteSize(signatureSetting.image)}}
+                    </div>
+                </dd>
+                <dt><span ngbTooltip="if it&#39;s set true by default this signatures will appear in\nthe document in which the user is signing.">Default Signature</span></dt>
+                <dd>
+                    <span>{{signatureSetting.defaultSignature}}</span>
+                </dd>
+                <dt><span ngbTooltip="Address of the user that needs to displayed.">Address</span></dt>
+                <dd>
+                    <span>{{signatureSetting.address}}</span>
+                </dd>
+                <dt><span>Created At</span></dt>
+                <dd>
+                    <span>{{signatureSetting.createdAt}}</span>
+                </dd>
+                <dt><span>Updated At</span></dt>
+                <dd>
+                    <span>{{signatureSetting.updatedAt}}</span>
+                </dd>
+                <dt><span>Users</span></dt>
+                <dd>
+                    <div *ngIf="signatureSetting.users">
+                        <a [routerLink]="['/users', signatureSetting.users?.id, 'view']">{{signatureSetting.users?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/signature-setting', signatureSetting.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

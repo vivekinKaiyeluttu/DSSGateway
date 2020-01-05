@@ -1,0 +1,43 @@
+{
+    "name": "WorkFlowUser",
+    "fields": [
+        {
+            "fieldName": "step",
+            "javadoc": "indicates the position of user at which he can sign in",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "documentSignature",
+            "otherEntityRelationshipName": "workFlowUser",
+            "relationshipName": "documentSignature"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "workFlow",
+            "otherEntityRelationshipName": "workFlowUser",
+            "relationshipName": "workFlow",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "users",
+            "otherEntityRelationshipName": "workFlowUser",
+            "relationshipName": "users",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200105022006",
+    "javadoc": "WorkFlowUser holds the definition of users\\nwho can participate in the workflow.\\nGenerally WorkFlowUsers are decided by the user who is\\ncreating the workflow. He can choose the user who will be\\npart of workflow while creating the workflow. If a user is not within the\\nsystem then a user will be created and invite will be sent to him.",
+    "entityTableName": "work_flow_user",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

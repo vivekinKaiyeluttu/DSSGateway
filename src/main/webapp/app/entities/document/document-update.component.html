@@ -1,0 +1,77 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-document-heading">Create or edit a Document</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fileName" ngbTooltip="Name of the file">File Name</label>
+                    <input type="text" class="form-control" name="fileName" id="field_fileName"
+                           formControlName="fileName"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_messageDigest" ngbTooltip="file digest to identify the file">Message Digest</label>
+                    <input type="text" class="form-control" name="messageDigest" id="field_messageDigest"
+                           formControlName="messageDigest"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_file" ngbTooltip="actual file, will be deprecated after first cut">File</label>
+                    <div>
+                        <div *ngIf="editForm.get('file')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('fileContentType')!.value, editForm.get('file')!.value)">open</a><br>
+                            <span class="pull-left">{{editForm.get('fileContentType')!.value}}, {{byteSize(editForm.get('file')!.value)}}</span>
+                            <button type="button" (click)="editForm.patchValue({file: null});editForm.patchValue({fileContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_file" (change)="setFileData($event, 'file', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="file" id="field_file"
+                           formControlName="file"/>
+                    <input type="hidden" class="form-control" name="fileContentType" id="field_fileContentType"
+                           formControlName="fileContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_expireAt" ngbTooltip="date after which it can not be signed by anyone">Expire At</label>
+                    <div class="input-group">
+                        <input id="field_expireAt" type="text" class="form-control" name="expireAt" ngbDatepicker  #expireAtDp="ngbDatepicker" formControlName="expireAt"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="expireAtDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_createdAt">Created At</label>
+                    <div class="input-group">
+                        <input id="field_createdAt" type="text" class="form-control" name="createdAt" ngbDatepicker  #createdAtDp="ngbDatepicker" formControlName="createdAt"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="createdAtDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_workFlow">Work Flow</label>
+                    <select class="form-control" id="field_workFlow" name="workFlow" formControlName="workFlow">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="workFlowOption.id === editForm.get('workFlow')!.value?.id ? editForm.get('workFlow')!.value : workFlowOption" *ngFor="let workFlowOption of workflows; trackBy: trackById">{{workFlowOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

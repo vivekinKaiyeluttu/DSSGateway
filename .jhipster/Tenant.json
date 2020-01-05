@@ -1,0 +1,80 @@
+{
+    "name": "Tenant",
+    "fields": [
+        {
+            "fieldName": "name",
+            "javadoc": "Name of the Tenant",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "domain",
+            "javadoc": "URL of the Tenant",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "primaryEmail",
+            "javadoc": "Primary Email contact in tenant",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "secondaryEmail",
+            "javadoc": "Secondary Email contact in tenant",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "organization",
+            "javadoc": "Name of the Organization",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "updatedAt",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "users",
+            "otherEntityRelationshipName": "tenant",
+            "relationshipName": "users"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "userRole",
+            "otherEntityRelationshipName": "tenant",
+            "relationshipName": "userRole"
+        }
+    ],
+    "changelogDate": "20200105021958",
+    "javadoc": "Tenant will be used to implement & identify tenancy\\nof the user in service. Default organization of an user would be\\nfrom Kaiyeluthu. Tenant will be onboarded through different flows not\\ntargetted for the first cut release. So all users will belong to\\nKaiyeluthu by default.",
+    "entityTableName": "tenant",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="rolePermissionMapping">
+            <h2><span>Role Permission Mapping</span> {{rolePermissionMapping.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>User Role</span></dt>
+                <dd>
+                    <div *ngIf="rolePermissionMapping.userRole">
+                        <a [routerLink]="['/user-role', rolePermissionMapping.userRole?.id, 'view']">{{rolePermissionMapping.userRole?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Permission</span></dt>
+                <dd>
+                    <div *ngIf="rolePermissionMapping.permission">
+                        <a [routerLink]="['/permission', rolePermissionMapping.permission?.id, 'view']">{{rolePermissionMapping.permission?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/role-permission-mapping', rolePermissionMapping.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
