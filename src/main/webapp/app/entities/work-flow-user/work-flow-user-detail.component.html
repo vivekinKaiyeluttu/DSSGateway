@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="workFlowUser">
+            <h2><span>Work Flow User</span> {{workFlowUser.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span ngbTooltip="indicates the position of user at which he can sign in">Step</span></dt>
+                <dd>
+                    <span>{{workFlowUser.step}}</span>
+                </dd>
+                <dt><span>Work Flow</span></dt>
+                <dd>
+                    <div *ngIf="workFlowUser.workFlow">
+                        <a [routerLink]="['/work-flow', workFlowUser.workFlow?.id, 'view']">{{workFlowUser.workFlow?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Users</span></dt>
+                <dd>
+                    <div *ngIf="workFlowUser.users">
+                        <a [routerLink]="['/users', workFlowUser.users?.id, 'view']">{{workFlowUser.users?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/work-flow-user', workFlowUser.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

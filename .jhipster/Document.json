@@ -1,0 +1,56 @@
+{
+    "name": "Document",
+    "fields": [
+        {
+            "fieldName": "fileName",
+            "javadoc": "Name of the file",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "messageDigest",
+            "javadoc": "file digest to identify the file",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "file",
+            "javadoc": "actual file, will be deprecated after first cut",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "expireAt",
+            "javadoc": "date after which it can not be signed by anyone",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "documentSignature",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "documentSignature"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "workFlow",
+            "otherEntityRelationshipName": "document",
+            "relationshipName": "workFlow",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200105022007",
+    "javadoc": "Document is the hero of this application.\\nThis entity will hold information about the document.\\nit's expected to add more fields to this entity. When the document is\\nchanged/updated a new entry has to be added.",
+    "entityTableName": "document",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

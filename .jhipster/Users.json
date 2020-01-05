@@ -1,0 +1,111 @@
+{
+    "name": "Users",
+    "fields": [
+        {
+            "fieldName": "firstName",
+            "javadoc": "firstname of the user",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lastName",
+            "javadoc": "lastname of the user",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "email",
+            "javadoc": "user email",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^[A-Za-z0-9+_.-]+@(.+)$"
+        },
+        {
+            "fieldName": "password",
+            "javadoc": "password that can be used to login",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "verified",
+            "javadoc": "will be used during signup flow and in forget password flow",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "challengeToken",
+            "javadoc": "challenge that can be used while forget password flow and invite flow",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "workFlowInitiate",
+            "javadoc": "if an user dosn't have account while initiating WorkFlow then we will set",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "updatedAt",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "userRoleMapping",
+            "otherEntityRelationshipName": "users",
+            "relationshipName": "userRoleMapping"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "signatureSetting",
+            "otherEntityRelationshipName": "users",
+            "relationshipName": "signatureSetting"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "workFlow",
+            "otherEntityRelationshipName": "users",
+            "relationshipName": "workFlow"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "workFlowUser",
+            "otherEntityRelationshipName": "users",
+            "relationshipName": "workFlowUser"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "tenant",
+            "otherEntityRelationshipName": "users",
+            "relationshipName": "tenant",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200105021959",
+    "javadoc": "Users are the actors in the application who basically have\\ncapablities like creating work_flow, signing a document as part of work_flow\\nand verify the document that's been signed by others.",
+    "entityTableName": "users",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

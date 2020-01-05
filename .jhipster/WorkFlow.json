@@ -1,0 +1,54 @@
+{
+    "name": "WorkFlow",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Status",
+            "fieldValues": "INITIATED,EXPIRED,COMPLETED"
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedAt",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "workFlowUser",
+            "otherEntityRelationshipName": "workFlow",
+            "relationshipName": "workFlowUser"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "document",
+            "otherEntityRelationshipName": "workFlow",
+            "relationshipName": "document"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "users",
+            "otherEntityRelationshipName": "workFlow",
+            "relationshipName": "users",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200105022005",
+    "javadoc": "WorkFlow holds the definition of document\\nsigning workflow. A user who is creating a workflow\\nneed not to be a part of the workflow.",
+    "entityTableName": "work_flow",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

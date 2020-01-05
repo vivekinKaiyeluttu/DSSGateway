@@ -1,0 +1,67 @@
+<div>
+    <h2 id="page-heading">
+        <span>Work Flow Users</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-work-flow-user" [routerLink]="['/work-flow-user/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create a new Work Flow User
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="workFlowUsers?.length === 0">
+        <span>No workFlowUsers found</span>
+    </div>
+    <div class="table-responsive" *ngIf="workFlowUsers?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th scope="col" ><span>ID</span></th>
+            <th scope="col" ><span>Step</span></th>
+            <th scope="col" ><span>Work Flow</span></th>
+            <th scope="col" ><span>Users</span></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let workFlowUser of workFlowUsers ;trackBy: trackId">
+                <td><a [routerLink]="['/work-flow-user', workFlowUser.id, 'view' ]">{{workFlowUser.id}}</a></td>
+                <td>{{workFlowUser.step}}</td>
+                <td>
+                    <div *ngIf="workFlowUser.workFlow">
+                        <a [routerLink]="['/work-flow', workFlowUser.workFlow?.id, 'view' ]" >{{workFlowUser.workFlow?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="workFlowUser.users">
+                        <a [routerLink]="['/users', workFlowUser.users?.id, 'view' ]" >{{workFlowUser.users?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/work-flow-user', workFlowUser.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/work-flow-user', workFlowUser.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(workFlowUser)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

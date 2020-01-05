@@ -1,0 +1,29 @@
+{
+    "name": "Permission",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "Permissions",
+            "fieldValues": "DOCUMENT_READ,DOCUMENT_SIGN,CREATE_WF"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "rolePermissionMapping",
+            "otherEntityRelationshipName": "permission",
+            "relationshipName": "rolePermissionMapping"
+        }
+    ],
+    "changelogDate": "20200105022000",
+    "javadoc": "Permission are the list of possible permissions that are avaliable in the\\napplication.",
+    "entityTableName": "permission",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

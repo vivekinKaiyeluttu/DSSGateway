@@ -1,0 +1,42 @@
+{
+    "name": "UserRole",
+    "fields": [
+        {
+            "fieldName": "name",
+            "javadoc": "name of the role",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "rolePermissionMapping",
+            "otherEntityRelationshipName": "userRole",
+            "relationshipName": "rolePermissionMapping"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "userRoleMapping",
+            "otherEntityRelationshipName": "userRole",
+            "relationshipName": "userRoleMapping"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "tenant",
+            "otherEntityRelationshipName": "userRole",
+            "relationshipName": "tenant",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200105022002",
+    "javadoc": "UserRole is used to maintain the list of roles that are associated\\nfor a particular tenant. As there is a possiblity for need of customization\\nof roles for each and every tenant.",
+    "entityTableName": "user_role",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

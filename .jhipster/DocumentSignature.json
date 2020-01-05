@@ -1,0 +1,57 @@
+{
+    "name": "DocumentSignature",
+    "fields": [
+        {
+            "fieldName": "validFrom",
+            "javadoc": "Date from which the signature will be valid",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "validTo",
+            "javadoc": "Date till which the signature will be valid",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "deviceId",
+            "javadoc": "id of the device that's been used to sign by the user",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "signature",
+            "javadoc": "FIDO2 signature",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdAt",
+            "javadoc": "Date at which signature is created",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "document",
+            "otherEntityRelationshipName": "documentSignature",
+            "relationshipName": "document",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "workFlowUser",
+            "otherEntityRelationshipName": "documentSignature",
+            "relationshipName": "workFlowUser",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200105022008",
+    "javadoc": "DocumentSignature is second hero of this application\\nholds information about signature",
+    "entityTableName": "document_signature",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

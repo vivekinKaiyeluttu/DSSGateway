@@ -1,0 +1,70 @@
+{
+    "name": "SignatureSetting",
+    "fields": [
+        {
+            "fieldName": "name",
+            "javadoc": "name of the signature setting for identification",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "signAs",
+            "javadoc": "signAs text that needs to displayed in signature",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "designation",
+            "javadoc": "User designation it's optional",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "image",
+            "javadoc": "signature image that needs to appear in signature",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "defaultSignature",
+            "javadoc": "if it's set true by default this signatures will appear in\\nthe document in which the user is signing.",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "address",
+            "javadoc": "Address of the user that needs to displayed.",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdAt",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "updatedAt",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "users",
+            "otherEntityRelationshipName": "signatureSetting",
+            "relationshipName": "users",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200105022004",
+    "javadoc": "SignatureSetting holds settings of a signature\\nw.r.t to particular user. An user can have multiple\\nsignatures based on the document he can choose which signature\\nneeds to be inserted in a workflow.",
+    "entityTableName": "signature_setting",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-work-flow-user-heading">Create or edit a Work Flow User</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_step" ngbTooltip="indicates the position of user at which he can sign in">Step</label>
+                    <input type="number" class="form-control" name="step" id="field_step"
+                           formControlName="step"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_workFlow">Work Flow</label>
+                    <select class="form-control" id="field_workFlow" name="workFlow" formControlName="workFlow">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="workFlowOption.id === editForm.get('workFlow')!.value?.id ? editForm.get('workFlow')!.value : workFlowOption" *ngFor="let workFlowOption of workflows; trackBy: trackById">{{workFlowOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_users">Users</label>
+                    <select class="form-control" id="field_users" name="users" formControlName="users">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="usersOption.id === editForm.get('users')!.value?.id ? editForm.get('users')!.value : usersOption" *ngFor="let usersOption of users; trackBy: trackById">{{usersOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

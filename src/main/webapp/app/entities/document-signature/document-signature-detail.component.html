@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="documentSignature">
+            <h2><span>Document Signature</span> {{documentSignature.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span ngbTooltip="Date from which the signature will be valid">Valid From</span></dt>
+                <dd>
+                    <span>{{documentSignature.validFrom}}</span>
+                </dd>
+                <dt><span ngbTooltip="Date till which the signature will be valid">Valid To</span></dt>
+                <dd>
+                    <span>{{documentSignature.validTo}}</span>
+                </dd>
+                <dt><span ngbTooltip="id of the device that&#39;s been used to sign by the user">Device Id</span></dt>
+                <dd>
+                    <span>{{documentSignature.deviceId}}</span>
+                </dd>
+                <dt><span ngbTooltip="FIDO2 signature">Signature</span></dt>
+                <dd>
+                    <span>{{documentSignature.signature}}</span>
+                </dd>
+                <dt><span ngbTooltip="Date at which signature is created">Created At</span></dt>
+                <dd>
+                    <span>{{documentSignature.createdAt}}</span>
+                </dd>
+                <dt><span>Document</span></dt>
+                <dd>
+                    <div *ngIf="documentSignature.document">
+                        <a [routerLink]="['/document', documentSignature.document?.id, 'view']">{{documentSignature.document?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span>Work Flow User</span></dt>
+                <dd>
+                    <div *ngIf="documentSignature.workFlowUser">
+                        <a [routerLink]="['/work-flow-user', documentSignature.workFlowUser?.id, 'view']">{{documentSignature.workFlowUser?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/document-signature', documentSignature.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
